@@ -1,17 +1,334 @@
 ---
+import "../styles/global.css";
+import { businesses, categories } from "../data/businesses";
+import {
+  businessSearchText,
+  formatPhone,
+  getStatusLabel,
+  mapHref,
+  phoneHref,
+} from "../lib/business";
 
+const advertiserPhone = "270-917-2321";
+const googleFormBaseUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdBIcC1OMYKRpvVIbw3QOnjNXFkbKE_usTXFzs8kxHP75cTXQ/viewform";
+const googleFormUrl = `${googleFormBaseUrl}?usp=sf_link`;
+const googleFormEmbedUrl = `${googleFormBaseUrl}?embedded=true`;
+const pageTitle = "The Murray Highlighter | Murray KY Local Business Postcard";
+const pageDescription =
+  "Browse businesses featured on The Murray Highlighter postcard and request an advertising spot in the next Murray-area mailer.";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={pageDescription} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#businesses">Skip to businesses</a>
+    <header class="site-header" aria-label="Site header">
+      <a class="brand-mark" href="/" aria-label="The Murray Highlighter home">
+        <span class="brand-mark__stamp" aria-hidden="true">MH</span>
+        <span class="brand-mark__text">The Murray Highlighter</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#businesses">Businesses</a>
+        <a href="#advertise">Advertise</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="hero" aria-labelledby="site-title">
+        <div class="hero__content">
+          <p class="eyebrow">By Influence Marketing</p>
+          <h1 id="site-title">The Murray Highlighter</h1>
+          <p class="hero__lead">
+            A local postcard that turns one mailer into a quick guide for Murray-area
+            services, shops, food, and home pros.
+          </p>
+          <div class="hero__actions" aria-label="Primary actions">
+            <a class="button" href="#businesses">Browse Businesses</a>
+            <a class="button button--outline" href="#advertise">Advertise</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--warm" aria-labelledby="overview-heading">
+        <div class="section__inner">
+          <div class="section-heading">
+            <h2 id="overview-heading">A postcard people can actually use.</h2>
+            <p>
+              The printed card stays on the fridge, and this site makes every listing
+              clickable when someone is ready to call, map, or compare local options.
+            </p>
+          </div>
+          <div class="proof-strip" aria-label="Site highlights">
+            <div class="proof-item">
+              <strong>{businesses.length}</strong>
+              <span>featured local listings</span>
+            </div>
+            <div class="proof-item">
+              <strong>{categories.length}</strong>
+              <span>service categories</span>
+            </div>
+            <div class="proof-item">
+              <strong>{formatPhone(advertiserPhone)}</strong>
+              <span>advertise line</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="businesses" aria-labelledby="businesses-heading">
+        <div class="section__inner">
+          <div class="section-heading">
+            <h2 id="businesses-heading">Featured Businesses</h2>
+            <p>
+              Search by business name, service, or offer. Tap any listing for full
+              contact details and source links.
+            </p>
+          </div>
+
+          <div class="directory-tools">
+            <div class="search-field">
+              <label for="business-search">Search businesses</label>
+              <input
+                id="business-search"
+                data-directory-search
+                type="search"
+                placeholder="Try roofing, tax, tree, tents, or dog"
+                autocomplete="off"
+              />
+            </div>
+            <div class="filters" aria-label="Filter by category">
+              <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">
+                All
+              </button>
+              {
+                categories.map((category) => (
+                  <button class="filter-button" type="button" data-filter={category} aria-pressed="false">
+                    {category}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          <p class="result-line" data-result-count>{businesses.length} local businesses</p>
+          <p class="no-results" data-no-results hidden>
+            No listings match that search yet. Try a different service or clear the filter.
+          </p>
+
+          <div class="business-grid" data-business-grid>
+            {
+              businesses.map((business) => (
+                <article
+                  class="business-card"
+                  data-business-card
+                  data-category={business.category}
+                  data-search={businessSearchText(business)}
+                >
+                  <div>
+                    <div class="business-card__meta">
+                      <span class="category-pill">{business.category}</span>
+                    </div>
+                    <h3>
+                      <a href={`/business/${business.slug}/`}>{business.name}</a>
+                    </h3>
+                    <p>{business.summary}</p>
+                    {business.offer && <p class="offer">{business.offer}</p>}
+                    <ul class="contact-list" aria-label={`${business.name} contact details`}>
+                      {business.phone && (
+                        <li>
+                          <strong>Phone:</strong> {formatPhone(business.phone)}
+                        </li>
+                      )}
+                      {business.address && (
+                        <li>
+                          <strong>Address:</strong> {business.address}
+                        </li>
+                      )}
+                      {business.serviceArea && !business.address && (
+                        <li>
+                          <strong>Area:</strong> {business.serviceArea}
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <span class="status-pill">{getStatusLabel(business.verificationStatus)}</span>
+                    <div class="business-actions">
+                      {business.phone && (
+                        <a class="button" href={phoneHref(business.phone)} aria-label={`Call ${business.name}`}>
+                          Call
+                        </a>
+                      )}
+                      <a class="text-button" href={`/business/${business.slug}/`}>
+                        Details
+                      </a>
+                      {business.website && (
+                        <a class="text-button" href={business.website} target="_blank" rel="noreferrer">
+                          Website
+                        </a>
+                      )}
+                      {business.address && (
+                        <a class="text-button" href={mapHref(business.address)} target="_blank" rel="noreferrer">
+                          Map
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--warm" id="postcard" aria-labelledby="postcard-heading">
+        <div class="section__inner">
+          <div class="postcard-preview">
+            <img
+              src="/assets/murray-highlighter-postcard.jpg"
+              alt="The Murray Highlighter postcard featuring local Murray businesses"
+              loading="lazy"
+            />
+            <div class="postcard-copy">
+              <div class="section-heading">
+                <h2 id="postcard-heading">How the postcard works</h2>
+                <p>
+                  It gives local businesses a shared, affordable mail piece and gives
+                  households one place to find the businesses featured on it.
+                </p>
+              </div>
+              <a class="button button--dark" href={phoneHref(advertiserPhone)}>
+                Call {formatPhone(advertiserPhone)}
+              </a>
+            </div>
+          </div>
+
+          <div class="postcard-flow" aria-label="Postcard process">
+            <div class="flow-step">
+              <span>1</span>
+              <h3>Reserve a spot</h3>
+              <p>Businesses send their offer, contact details, and preferred ad message.</p>
+            </div>
+            <div class="flow-step">
+              <span>2</span>
+              <h3>Mail locally</h3>
+              <p>The Murray Highlighter reaches households with one shared postcard.</p>
+            </div>
+            <div class="flow-step">
+              <span>3</span>
+              <h3>Make it clickable</h3>
+              <p>This directory gives recipients a fast way to call, map, or visit each listing.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--dark" id="advertise" aria-labelledby="advertise-heading">
+        <div class="section__inner advertise-layout">
+          <div class="advertise-copy">
+            <p class="eyebrow">Advertise locally</p>
+            <h2 id="advertise-heading">Put your business on the next Murray Highlighter.</h2>
+            <p>
+              Call the advertising line now, or send the form and include the service category,
+              offer, and contact details customers should remember.
+            </p>
+            <div class="hero__actions">
+              <a class="button" href={phoneHref(advertiserPhone)}>
+                Call {formatPhone(advertiserPhone)}
+              </a>
+              <a class="button button--outline" href={googleFormUrl} target="_blank" rel="noreferrer">
+                Open Form
+              </a>
+            </div>
+          </div>
+
+          <div class="google-form-panel" aria-label="Advertise request form">
+            <iframe
+              class="google-form-frame"
+              title="Advertise on The Murray Highlighter form"
+              src={googleFormEmbedUrl}
+              loading="lazy">Loading...</iframe>
+            <div class="form-actions form-actions--between">
+              <p class="form-note">Having trouble with the embedded form?</p>
+              <a class="text-button" href={googleFormUrl} target="_blank" rel="noreferrer">
+                Open in Google Forms
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>
+          The Murray Highlighter by Influence Marketing. Business details are sourced
+          from the postcard and public listings, then confirmed with advertisers when possible.
+        </p>
+        <a class="text-button" href={phoneHref(advertiserPhone)}>Advertise</a>
+      </div>
+    </footer>
+
+    <script>
+      const cards = Array.from(document.querySelectorAll("[data-business-card]"));
+      const searchInput = document.querySelector("[data-directory-search]");
+      const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
+      const count = document.querySelector("[data-result-count]");
+      const noResults = document.querySelector("[data-no-results]");
+      let activeFilter = "all";
+
+      function applyDirectoryFilter() {
+        const query = searchInput instanceof HTMLInputElement ? searchInput.value.trim().toLowerCase() : "";
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          if (!(card instanceof HTMLElement)) return;
+
+          const category = card.dataset.category ?? "";
+          const searchText = card.dataset.search ?? "";
+          const categoryMatches = activeFilter === "all" || category === activeFilter;
+          const searchMatches = query.length === 0 || searchText.includes(query);
+          const isVisible = categoryMatches && searchMatches;
+
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (count) {
+          count.textContent = `${visibleCount} local ${visibleCount === 1 ? "business" : "businesses"}`;
+        }
+
+        if (noResults instanceof HTMLElement) {
+          noResults.hidden = visibleCount !== 0;
+        }
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (!(button instanceof HTMLButtonElement)) return;
+
+          activeFilter = button.dataset.filter ?? "all";
+          filterButtons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle("is-active", isActive);
+            item.setAttribute("aria-pressed", String(isActive));
+          });
+          applyDirectoryFilter();
+        });
+      });
+
+      if (searchInput instanceof HTMLInputElement) {
+        searchInput.addEventListener("input", applyDirectoryFilter);
+      }
+    </script>
+  </body>
 </html>

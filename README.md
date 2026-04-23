@@ -1,43 +1,33 @@
-# Astro Starter Kit: Minimal
+# The Murray Highlighter
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Static Astro site for The Murray Highlighter, a Murray-area postcard mailer that
+features local businesses and gives postcard recipients clickable contact details.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+- `npm run dev` starts the local development server.
+- `npm run validate:data` checks business records, phone links, slugs, and sources.
+- `npm run check` runs Astro and TypeScript checks.
+- `npm run build` creates the static site in `dist`.
+- `npm run preview` serves the production build locally.
+- `npm run test:e2e` runs the Playwright smoke tests.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Cheapest Hosting Notes
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+This site is ready for cheap static hosting. The lowest-risk free setup is
+Cloudflare Pages plus a Google Form for advertiser submissions.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Node version: `22.12.0`, set by `.node-version`
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+After deployment, point the Namecheap domain to Cloudflare by changing the
+domain's nameservers in Namecheap to the nameservers Cloudflare assigns. The
+advertiser form is embedded from Google Forms, with a direct Google Forms fallback
+link for mobile browsers.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Business Data
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Listings live in `src/data/businesses.ts`. Public pages do not show internal
+verification notes. Rows marked `needs-verification` should be confirmed with the
+advertiser before launch.
