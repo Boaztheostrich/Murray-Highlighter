@@ -414,8 +414,7 @@ button {
   margin-bottom: 0.9rem;
 }
 
-.category-pill,
-.status-pill {
+.category-pill {
   display: inline-flex;
   align-items: center;
   width: fit-content;
@@ -430,11 +429,6 @@ button {
 .category-pill {
   background: rgba(38, 111, 134, 0.1);
   color: var(--blue);
-}
-
-.status-pill {
-  background: rgba(73, 107, 69, 0.12);
-  color: var(--green);
 }
 
 .business-card h3 {

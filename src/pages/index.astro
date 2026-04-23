@@ -4,7 +4,6 @@ import { businesses, categories } from "../data/businesses";
 import {
   businessSearchText,
   formatPhone,
-  getStatusLabel,
   mapHref,
   phoneHref,
 } from "../lib/business";
@@ -161,7 +160,6 @@ const pageDescription =
                     </ul>
                   </div>
                   <div>
-                    <span class="status-pill">{getStatusLabel(business.verificationStatus)}</span>
                     <div class="business-actions">
                       {business.phone && (
                         <a class="button" href={phoneHref(business.phone)} aria-label={`Call ${business.name}`}>

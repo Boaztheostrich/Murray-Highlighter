@@ -43,11 +43,11 @@ export function mapHref(address: string): string {
 export function getStatusLabel(status: VerificationStatus): string {
   switch (status) {
     case "verified":
-      return "Matched to public listing";
+      return "Verified listing";
     case "postcard-only":
-      return "Listed from the postcard";
+      return "Confirmed from the postcard";
     case "needs-verification":
-      return "Campaign details need owner confirmation";
+      return "Needs owner confirmation";
   }
 }
 

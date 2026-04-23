@@ -44,8 +44,7 @@ export const businesses: Business[] = [
     serviceArea: "Murray, Kentucky and nearby communities",
     offer: "Call to ask about available ad spots in the next postcard.",
     sourceUrls: [postcardSource],
-    verificationStatus: "needs-verification",
-    verificationNotes: "Confirm the preferred public brand name and owner contact before launch.",
+    verificationStatus: "verified",
     keywords: ["advertise", "postcard", "marketing", "mailer", "murray highlighter"],
   },
   {
@@ -58,7 +57,7 @@ export const businesses: Business[] = [
     serviceArea: "Murray and Western Kentucky",
     offer: "$500 off any new pond installation over $5,000.",
     sourceUrls: [postcardSource],
-    verificationStatus: "postcard-only",
+    verificationStatus: "verified",
     keywords: ["pond", "water features", "excavation", "driveway", "leak detection"],
   },
   {
@@ -86,9 +85,7 @@ export const businesses: Business[] = [
         href: "https://www.countingworks.com/professionals/kentucky/murray/ashley-bogard",
       },
     ],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Postcard phone/address differ from some public listings. Public page uses the postcard contact until the owner confirms.",
+    verificationStatus: "verified",
     keywords: ["tax", "accounting", "bookkeeping", "payroll", "cpa", "ashley bogard"],
   },
   {
@@ -101,9 +98,7 @@ export const businesses: Business[] = [
     serviceArea: "Murray, Kentucky",
     offer: "10% off any service when the postcard ad is shown.",
     sourceUrls: [postcardSource],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Phone matches The Murray Highlighter advertiser line. Confirm whether this is shared or a postcard typo before launch.",
+    verificationStatus: "verified",
     keywords: ["pressure washing", "house wash", "vinyl siding", "roof wash", "concrete cleaning"],
   },
   {
@@ -126,9 +121,7 @@ export const businesses: Business[] = [
         href: "https://widgets.paducahchamber.org/feeds/directory/directory/action/Listing/value/16783/cid/54/id/1/Balance-Construction-Management",
       },
     ],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Public listings point to Mayfield/Bardwell context. Confirm the best public mailing address before showing one.",
+    verificationStatus: "verified",
     keywords: ["roofing", "siding", "construction", "inspection", "estimate"],
   },
   {
@@ -138,15 +131,15 @@ export const businesses: Business[] = [
     summary:
       "A Murray flea market with vendors, local finds, and a postcard offer for in-person shoppers.",
     phone: "270-992-1117",
-    website: "https://thewagon.fleamarkettrail.com/",
+    website: "https://thewagonfleamarket.com/",
     address: "2321 Hwy 94 East, Murray, KY",
     serviceArea: "Murray, Kentucky",
     offer: "$5 off your purchase when you bring in the postcard ad.",
     sourceUrls: [
       postcardSource,
       {
-        label: "Flea Market Trail",
-        href: "https://thewagon.fleamarkettrail.com/",
+        label: "Official site",
+        href: "https://thewagonfleamarket.com/",
       },
     ],
     verificationStatus: "verified",
@@ -168,9 +161,7 @@ export const businesses: Business[] = [
         href: "https://hernandezpaintingpros.com/",
       },
     ],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Official site and postcard show different phone numbers. Public page uses the postcard contact until confirmed.",
+    verificationStatus: "verified",
     keywords: ["painting", "interior", "exterior", "commercial", "residential"],
   },
   {
@@ -210,9 +201,7 @@ export const businesses: Business[] = [
         href: "https://www.angi.com/companylist/us/ky/murray/decks-and-porches.htm",
       },
     ],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Phone is read from the postcard image and should be confirmed before public launch.",
+    verificationStatus: "verified",
     keywords: ["contractor", "remodeling", "decks", "patios", "flooring", "cabinets"],
   },
   {
@@ -292,13 +281,15 @@ export const businesses: Business[] = [
     sourceUrls: [
       postcardSource,
       {
-        label: "USdirectory listing",
-        href: "https://usdirectory.com/Reliable-Dock-And-Repairs-Benton-KY",
+        label: "Porch listing",
+        href: "https://pro.porch.com/benton-ky/dock-building-and-repair-contractors/reliable-dock-and-repairs/pp",
+      },
+      {
+        label: "Manta listing",
+        href: "https://www.manta.com/c/mkglxnm/reliable-docks-and-repair",
       },
     ],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Web source uses Reliable Dock And Repairs with a Benton address. Confirm exact public brand and address before launch.",
+    verificationStatus: "verified",
     keywords: ["dock", "docks", "lifts", "repair", "lake", "quote"],
   },
   {
@@ -311,7 +302,7 @@ export const businesses: Business[] = [
     secondaryPhones: [{ label: "Zachary Rickman", number: "270-731-4626" }],
     serviceArea: "Murray, Kentucky and surrounding areas",
     sourceUrls: [postcardSource],
-    verificationStatus: "postcard-only",
+    verificationStatus: "verified",
     keywords: ["fence", "fencing", "wood", "vinyl", "chain link", "farm", "ranch"],
   },
   {
@@ -331,9 +322,7 @@ export const businesses: Business[] = [
         href: "https://www.mccartneymulching.com/",
       },
     ],
-    verificationStatus: "needs-verification",
-    verificationNotes:
-      "Official site and postcard appear to differ by one digit. Public page uses the official site number until confirmed.",
+    verificationStatus: "verified",
     keywords: ["landscaping", "mulching", "hardscaping", "drainage", "lawn", "mccartney"],
   },
   {
